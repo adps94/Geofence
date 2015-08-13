@@ -17,21 +17,43 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/layout_padding">
+    android:padding="@dimen/layout_padding"
+    android:background="#666666">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/add_geofences_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:onClick="addGeofencesButtonHandler"
-        android:text="@string/add_geofences" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="140dp"
+            android:hint="Trip ID"
+            android:textColorHint="#95a5a6"
+            android:gravity="center"
+            android:background="#fff"/>
+        <Button
+            android:id="@+id/add_geofences_button"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:onClick="addGeofencesButtonHandler"
+            android:text="@string/add_geofences"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="210dp" />
 
-    <Button
-        android:id="@+id/remove_geofences_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:onClick="removeGeofencesButtonHandler"
-        android:text="@string/remove_geofences" />
+        <Button
+            android:id="@+id/remove_geofences_button"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:onClick="removeGeofencesButtonHandler"
+            android:text="@string/remove_geofences"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="270dp" />
+
+    </RelativeLayout>
+
+
 </RelativeLayout>

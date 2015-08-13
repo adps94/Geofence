@@ -26,9 +26,7 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-import android.telephony.SmsManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.location.Geofence;
@@ -75,7 +73,7 @@ public class GeofenceTransitionsIntentService extends IntentService {
         if (geofencingEvent.hasError()) {
             String errorMessage = GeofenceErrorMessages.getErrorString(this,
                     geofencingEvent.getErrorCode());
-            Log.e(TAG, errorMessage);
+            //Log.e(TAG, errorMessage);
             return;
         }
 
@@ -98,7 +96,7 @@ public class GeofenceTransitionsIntentService extends IntentService {
            /* TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);  //gets the current TelephonyManager
             if (tm.getSimState() != TelephonyManager.SIM_STATE_ABSENT){
                 Toast.makeText(getApplicationContext(), "Sim card", Toast.LENGTH_LONG).show();*/
-                try {
+              /*  try {
                     SmsManager smsManager = SmsManager.getDefault();
                     smsManager.sendTextMessage("8547235495", null,geofenceTransitionDetails, null, null);
                     Handler mHandler = new Handler(getMainLooper());
@@ -118,7 +116,7 @@ public class GeofenceTransitionsIntentService extends IntentService {
                         }
                     });
                     e.printStackTrace();
-                }
+                }*/
            /* } else {
                 Handler mHandler = new Handler(getMainLooper());
                 mHandler.post(new Runnable() {
@@ -134,10 +132,10 @@ public class GeofenceTransitionsIntentService extends IntentService {
             // Send notification and log the transition details.
 
             sendNotification(geofenceTransitionDetails);
-            Log.i(TAG, geofenceTransitionDetails);
+          //  Log.i(TAG, geofenceTransitionDetails);
         } else {
             // Log the error.
-            Log.e(TAG, getString(R.string.geofence_transition_invalid_type, geofenceTransition));
+          //  Log.e(TAG, getString(R.string.geofence_transition_invalid_type, geofenceTransition));
         }
     }
 
@@ -165,13 +163,15 @@ public class GeofenceTransitionsIntentService extends IntentService {
         }
         String triggeringGeofencesIdsString = TextUtils.join(", ",  triggeringGeofencesIdsList);
 
-       /* Handler mHandler = new Handler(getMainLooper());
+        new postGeoAlert().execute();
+
+        Handler mHandler = new Handler(getMainLooper());
         mHandler.post(new Runnable() {
             @Override
             public void run() {
                 Toast.makeText(getApplicationContext(), "Geofence", Toast.LENGTH_LONG).show();
             }
-        });*/
+        });
         return geofenceTransitionString + ": " + triggeringGeofencesIdsString;
     }
 

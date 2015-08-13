@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -152,20 +151,20 @@ public class MainActivity extends ActionBarActivity implements
      */
     @Override
     public void onConnected(Bundle connectionHint) {
-        Log.i(TAG, "Connected to GoogleApiClient");
+       // Log.i(TAG, "Connected to GoogleApiClient");
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult result) {
         // Refer to the javadoc for ConnectionResult to see what error codes might be returned in
         // onConnectionFailed.
-        Log.i(TAG, "Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
+      //  Log.i(TAG, "Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
     }
 
     @Override
     public void onConnectionSuspended(int cause) {
         // The connection to Google Play services was lost for some reason. 
-        Log.i(TAG, "Connection suspended");
+      //  Log.i(TAG, "Connection suspended");
         
         // onConnected() will be called again automatically when the service reconnects
     }
@@ -239,8 +238,8 @@ public class MainActivity extends ActionBarActivity implements
     }
 
     private void logSecurityException(SecurityException securityException) {
-        Log.e(TAG, "Invalid location permission. " +
-                "You need to use ACCESS_FINE_LOCATION with geofences", securityException);
+        /*Log.e(TAG, "Invalid location permission. " +
+                "You need to use ACCESS_FINE_LOCATION with geofences", securityException);*/
     }
 
     /**
@@ -275,7 +274,7 @@ public class MainActivity extends ActionBarActivity implements
             // Get the status code for the error and log it using a user-friendly message.
             String errorMessage = GeofenceErrorMessages.getErrorString(this,
                     status.getStatusCode());
-            Log.e(TAG, errorMessage);
+            //Log.e(TAG, errorMessage);
         }
     }
 
