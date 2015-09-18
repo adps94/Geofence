@@ -45,27 +45,12 @@ public final class Constants {
      */
     public static final long GEOFENCE_EXPIRATION_IN_MILLISECONDS =
             GEOFENCE_EXPIRATION_IN_HOURS * 60 * 60 * 1000;
-    public static final float GEOFENCE_RADIUS_IN_METERS = 100; // 1 mile, 1.6 km
+    public static final float GEOFENCE_RADIUS_IN_METERS = 150; // 1 mile, 1.6 km
 
     /**
      * Map for storing information about airports in the San Francisco bay area.
      */
-    public static final HashMap<String, LatLng> BAY_AREA_LANDMARKS = new HashMap<String, LatLng>();
-    static {
-        // San Francisco International Airport.
-        // Googleplex.
+    public static final HashMap<String, LatLng> TRIP_POINTS = new HashMap<String, LatLng>();
 
 
-        BAY_AREA_LANDMARKS.put("Asset Homes", new LatLng(8.562416,76.856627));
-        BAY_AREA_LANDMARKS.put("Menamkulam", new LatLng(8.563676,76.860099));
-        BAY_AREA_LANDMARKS.put("Kazhakoottam", new LatLng(8.568439,76.873151));
-        BAY_AREA_LANDMARKS.put("Tech-Park Gate", new LatLng(8.557745,76.876370));
-        BAY_AREA_LANDMARKS.put("TechPark", new LatLng(8.556277,76.881949));
-
-        BAY_AREA_LANDMARKS.put("Vetturoad", new LatLng(8.582337,76.863720));
-        BAY_AREA_LANDMARKS.put("Kinfra", new LatLng(8.586973,76.877030));
-        BAY_AREA_LANDMARKS.put("EY", new LatLng(8.580703,76.877254));
-
-       // new GetApiData().execute();
-    }
 }

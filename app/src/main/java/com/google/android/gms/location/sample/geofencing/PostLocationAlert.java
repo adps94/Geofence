@@ -8,9 +8,8 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
-public class postGeoAlert extends AsyncTask<String, Void, Void>{
-
-    private final String EXCHANGE_NAME = "geofence";
+public class PostLocationAlert extends AsyncTask<String, Void, Void>{
+    private final String EXCHANGE_NAME = "location";
     private ConnectionFactory factory;
     private Connection connection;
     private Channel channel1;
@@ -20,7 +19,7 @@ public class postGeoAlert extends AsyncTask<String, Void, Void>{
 
             String tempstr = "";
             for (String aMessage : Message) tempstr += aMessage;
-           // JSONObject message=new JSONObject(tempstr);
+            // JSONObject message=new JSONObject(tempstr);
             if (channel1 == null) {
 
                 factory = new ConnectionFactory();

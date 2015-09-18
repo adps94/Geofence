@@ -27,6 +27,7 @@ import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.location.Geofence;
@@ -46,7 +47,8 @@ public class GeofenceTransitionsIntentService extends IntentService {
 
 
     protected static final String TAG = "geofence-transitions-service";
-
+    public String triggeringGeofencesIdsString;
+    public String geofenceTransitionString;
     /**
      * This constructor is required, and calls the super IntentService(String)
      * constructor with the name for a worker thread.
@@ -69,11 +71,12 @@ public class GeofenceTransitionsIntentService extends IntentService {
     @Override
 
     protected void onHandleIntent(Intent intent) {
+        Log.d("service", "running");
         GeofencingEvent geofencingEvent = GeofencingEvent.fromIntent(intent);
         if (geofencingEvent.hasError()) {
             String errorMessage = GeofenceErrorMessages.getErrorString(this,
                     geofencingEvent.getErrorCode());
-            //Log.e(TAG, errorMessage);
+            Log.e(TAG, errorMessage);
             return;
         }
 
@@ -132,11 +135,16 @@ public class GeofenceTransitionsIntentService extends IntentService {
             // Send notification and log the transition details.
 
             sendNotification(geofenceTransitionDetails);
-          //  Log.i(TAG, geofenceTransitionDetails);
+           notifier();
+            Log.i(TAG, geofenceTransitionDetails);
         } else {
             // Log the error.
-          //  Log.e(TAG, getString(R.string.geofence_transition_invalid_type, geofenceTransition));
+            Log.e(TAG, getString(R.string.geofence_transition_invalid_type, geofenceTransition));
         }
+    }
+    public void notifier(){
+
+        new postGeoAlert().execute(geofenceTransitionString+":"+triggeringGeofencesIdsString);
     }
 
     /**
@@ -154,16 +162,16 @@ public class GeofenceTransitionsIntentService extends IntentService {
 
 
 
-        String geofenceTransitionString = getTransitionString(geofenceTransition);
+        geofenceTransitionString = getTransitionString(geofenceTransition);
 
         // Get the Ids of each geofence that was triggered.
         ArrayList triggeringGeofencesIdsList = new ArrayList();
         for (Geofence geofence : triggeringGeofences) {
             triggeringGeofencesIdsList.add(geofence.getRequestId());
         }
-        String triggeringGeofencesIdsString = TextUtils.join(", ",  triggeringGeofencesIdsList);
+         triggeringGeofencesIdsString = TextUtils.join(", ",  triggeringGeofencesIdsList);
 
-        new postGeoAlert().execute();
+
 
         Handler mHandler = new Handler(getMainLooper());
         mHandler.post(new Runnable() {
@@ -172,6 +180,7 @@ public class GeofenceTransitionsIntentService extends IntentService {
                 Toast.makeText(getApplicationContext(), "Geofence", Toast.LENGTH_LONG).show();
             }
         });
+
         return geofenceTransitionString + ": " + triggeringGeofencesIdsString;
     }
 
@@ -200,11 +209,11 @@ public class GeofenceTransitionsIntentService extends IntentService {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
 
         // Define the notification settings.
-        builder.setSmallIcon(R.drawable.ic_launcher)
+        builder.setSmallIcon(R.drawable.ic_notification)
                 // In a real app, you may want to use a library like Volley
                 // to decode the Bitmap.
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(),
-                        R.drawable.ic_launcher))
+                        R.drawable.ic_notification))
                 .setColor(Color.RED)
                 .setContentTitle(notificationDetails)
                 .setContentText(getString(R.string.geofence_transition_notification_text))
